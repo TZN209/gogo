@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/img/anhdaidien.jpg" type="image/x-icon" sizes="16x16">
+    <link rel="stylesheet" href="./assets/css/history.css">
+    <title>History</title>
+</head>
+<body>
+<div id="main">
+    <!-- Header -->
+    <div id="header">
+        <ul id="nav">
+            <li><a href="./index.html"> Home</a></li>
+            <li><a href="#Band"> Band</a></li>
+            <li><a href="#Tour"> Tour</a></li>
+            <li><a href="#Contact"> Contact</a></li>
+            <li>
+                <a href="#"> More <i class="nav-arrow-down ti-angle-down"></i></a>
+                <ul class="subnav">
+                    <li><a href="./history.html"> History</a></li>
+                    <li><a href="./members.html"> Members</a></li>
+                    <li><a href="./album.html"> Album</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="search-btn">
+            <i class="search-icon ti-search"></i>
+        </div>
+
+        <div id="mobile-menu" class="mobile-menu-btn">
+            <i class="menu-icon ti-menu"></i>
+        </div>
+    </div>
+</div>
+
+<script>
+    const buyBtns = document.querySelectorAll('.js-buy-ticket')
+    const modal = document.querySelector('.js-modal')
+    const modalContainer = document.querySelector('.js-modal-container')
+    const modalClose = document.querySelector('.js-modal-close')
+
+    // Hàm hiển thị
+    function showBuyTickets()
+    {
+        modal.classList.add('open')
+    }
+
+    // Hàm ẩn
+    function hideBuyTickets()
+    {
+        modal.classList.remove('open')
+    }
+    // Lặp qua từng thẻ button và nghe hành vi click
+    for(const buyBtn of buyBtns)
+    {
+        buyBtn.addEventListener('click', showBuyTickets)
+    }
+    // Nghe hành vi click vào button close
+    modalClose.addEventListener('click', hideBuyTickets)
+
+    modal.addEventListener('click', hideBuyTickets)
+
+    modalContainer.addEventListener('click', function(event){
+        event.stopPropagation()
+    })
+</script>
+<script>
+    var header = document.getElementById('header');
+    var mobileMenu = document.getElementById('mobile-menu');
+    var headerHeight = header.clientHeight;
+
+    // Dong/mo mobile menu
+    mobileMenu.onclick = function() {
+        var isClosed = header.clientHeight === headerHeight;
+        if (isClosed) {
+            header.style.height = 'auto';
+        }
+        else {
+            header.style.height = null;
+        }
+    }
+
+    // Tu dong dong khi chon menu
+    var menuItems = document.querySelectorAll('#nav li a[href*="#');
+    for (var i = 0; i < menuItems.length; i++) {
+        var menuItem = menuItems[i];
+        
+        menuItem.onclick = function(event) {
+            var isParentMenu = this.nextElementSibling && this.nextElementSibling.classList.contains('subnav');
+            if (isParentMenu) {
+                event.preventDefault();               
+            }
+            else {
+                header.style.height = null;
+            }
+        }
+    }
+</script>
+</body>
+</html>
